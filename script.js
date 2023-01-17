@@ -9,8 +9,9 @@ window.onload = function () {
     return ;
   else {
     let data = JSON.parse(localStorage.getItem("tasks"));
+
     data?.forEach((element) => {
-      createTask(element.title);
+      createTask(element.title, element.id);
       inputText.value = "";
     });
   }
@@ -43,9 +44,8 @@ function createTask(value, generateId) {
 }
 
 function deletTask(id) {
-  console.log(id);
   if (localStorage.getItem("tasks")) {
-    document.getElementById(`${id}`).style = `display: none;`
+    document.getElementById(`${id}`).remove()
     let data = JSON.parse(localStorage.getItem("tasks"));
     let filter = data?.filter((element) => element.id !== id);
     localStorage.setItem("tasks", JSON.stringify(filter));
